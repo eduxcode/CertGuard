@@ -11,7 +11,7 @@ import (
 // TestCheckCertificate verifica a função CheckCertificate
 func TestCheckCertificate(t *testing.T) {
 	// Domínio de teste
-	domain := "google.com"
+	domain := "example.com"
 
 	// Verifica o certificado
 	info, err := CheckCertificate(domain)

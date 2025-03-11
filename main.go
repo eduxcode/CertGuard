@@ -9,7 +9,7 @@ import (
 
 func main() {
 	// Domínio a ser verificado
-	domain := "gogle.com"
+	domain := "example.com"
 
 	// Verifica o certificado
 	info, err := certcheck.CheckCertificate(domain)

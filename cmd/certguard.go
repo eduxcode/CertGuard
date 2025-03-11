@@ -2,11 +2,10 @@ package cmd
 
 import (
 	"crypto/tls"
-	_"fmt"
 	"log"
 
 	"github.com/eduxcode/certguard/certcheck"
-	"github.com/fatih/color"
+	"github.com/gookit/color"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +13,7 @@ var checkCmd = &cobra.Command{
 	Use:   "check [domínio]",
 	Short: "Verifica o certificado SSL/TLS de um domínio.",
 	Long:  `Verifica o certificado SSL/TLS de um domínio e exibe informações como validade, emitente e algoritmo de criptografia.`,
-	Args:  cobra.ExactArgs(1), // Exige exatamente 1 argumento (domínio)
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		domain := args[0]
 
@@ -24,15 +23,16 @@ var checkCmd = &cobra.Command{
 			log.Fatalf("Erro ao verificar o certificado: %v", err)
 		}
 
+        color.ForceOpenColor()
 		// Exibe as informações com cores
-		color.Cyan("🔒 Domínio: %s\n", info.Domain)
-		color.Blue("📜 Emitido por: %s\n", info.Issuer)
-		color.Yellow("📅 Data de expiração: %s\n", info.ExpiryDate.Format("2006-01-02"))
-		color.Magenta("⏳ Dias restantes: %d\n", info.DaysRemaining)
+		color.Cyan.Printf("🔒 Domínio: %s\n", info.Domain)
+		color.Blue.Printf("📜 Emitido por: %s\n", info.Issuer)
+		color.Yellow.Printf("📅 Data de expiração: %s\n", info.ExpiryDate.Format("2006-01-02"))
+		color.Magenta.Printf("⏳ Dias restantes: %d\n", info.DaysRemaining)
 		if info.IsValid {
-			color.Green("✅ Status: Válido\n")
+			color.Green.Println("✅ Status: Válido")
 		} else {
-			color.Red("❌ Status: Expirado\n")
+			color.Red.Println("❌ Status: Expirado")
 		}
 
 		// Verifica o algoritmo de criptografia
@@ -46,7 +46,7 @@ var checkCmd = &cobra.Command{
 
 		cert := conn.ConnectionState().PeerCertificates[0]
 		algorithmStatus := certcheck.CheckEncryptionAlgorithm(cert)
-		color.Cyan("🔐 Algoritmo de criptografia: %s\n", algorithmStatus)
+		color.Cyan.Printf("🔐 Algoritmo de criptografia: %s\n", algorithmStatus)
 	},
 }
 
