@@ -116,4 +116,4 @@ Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](h
 
 ## Autor
 
-- **Davi Soaresr** ([GitHub](https://github.com/eduxcode))
+- **Davi Soares** ([GitHub](https://github.com/eduxcode))
